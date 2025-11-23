@@ -1,0 +1,20 @@
+name: Run Node.js script every minute
+
+on:
+  schedule:
+    - cron: "*/1 * * * *"  # every 1 minute
+  workflow_dispatch:  # allows manual trigger
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20' # or your version
+      - name: Install dependencies
+        run: npm install
+      - name: Run index.js
+        run: node index.js
